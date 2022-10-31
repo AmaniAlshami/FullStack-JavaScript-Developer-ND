@@ -24,10 +24,6 @@ describe('Testing Image Endpoints', () => {
         const response = yield request.get('/image?filename=default&width=100&height=100');
         expect(response.status).toBe(200);
     }));
-    it('Testing if Default resizing by width', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get('/image?filename=default&width=500');
-        expect(response.status).toBe(200);
-    }));
     it('Testing if Any image is not exist', () => __awaiter(void 0, void 0, void 0, function* () {
         yield request.get('/image?filename=default22').expect(404);
     }));
