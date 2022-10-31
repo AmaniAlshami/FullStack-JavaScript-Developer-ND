@@ -1,6 +1,5 @@
 import { Router, Request, Response } from 'express';
 import fs from 'fs';
-import path from 'path';
 import { validation } from '../../middlewares/validation';
 import { resizeImage , getImage} from '../../Utilities/imageHandler'
 
