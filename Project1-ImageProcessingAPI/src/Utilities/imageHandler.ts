@@ -6,7 +6,7 @@ const sharp = require('sharp');
  export async function resizeImage(filename : string, width : number, height: number) {
 
   try {
-    
+
     const imagePath = getImage(filename);
 
     await sharp(imagePath)
@@ -16,12 +16,14 @@ const sharp = require('sharp');
           height: height
         })
         .toFile(`./assets/thumbnails/${filename}_${width}_${height}.png`)
-        .then(()=>  console.log('success'));
+        .then(()=>  console.log('success'))
+        
         
         return path.join(__dirname,'../../assets/thumbnails/',`${filename}_${width}_${height}.png`);
   } 
   catch (error) {
     console.log(error)
+
   }
   
   }

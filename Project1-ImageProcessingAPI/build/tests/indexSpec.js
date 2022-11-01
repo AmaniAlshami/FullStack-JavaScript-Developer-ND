@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const index_1 = __importDefault(require("../index"));
+const imageHandler_1 = require("../Utilities/imageHandler");
+const path_1 = __importDefault(require("path"));
 const request = (0, supertest_1.default)(index_1.default);
 describe('Testing Image Endpoints', () => {
     it('Testing if Default image is exist', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -24,7 +26,17 @@ describe('Testing Image Endpoints', () => {
         const response = yield request.get('/image?filename=default&width=100&height=100');
         expect(response.status).toBe(200);
     }));
+    it('Testing if send Invalid width or hight', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/image?filename=default&width=100');
+        expect(response.status).toBe(404);
+    }));
     it('Testing if Any image is not exist', () => __awaiter(void 0, void 0, void 0, function* () {
         yield request.get('/image?filename=default22').expect(404);
+    }));
+    it('Testing resizing Function ', () => __awaiter(void 0, void 0, void 0, function* () {
+        expect(yield (0, imageHandler_1.resizeImage)("default", 500, 500)).toEqual(path_1.default.join(__dirname, '../../assets/thumbnails/default_500_500.png'));
+    }));
+    it('Testing getImage Function ', () => __awaiter(void 0, void 0, void 0, function* () {
+        expect(yield (0, imageHandler_1.getImage)("default")).toEqual(path_1.default.join(__dirname, '../../assets/images/default.png'));
     }));
 });
