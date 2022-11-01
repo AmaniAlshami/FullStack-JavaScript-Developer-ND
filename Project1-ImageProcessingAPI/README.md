@@ -2,7 +2,7 @@
 
 ## Introduction
 
-a small project continue one API used to resize image into given width and height. 
+a small project contains one API that used to resize image into given width and height. 
 
 ## Getting Started
 
