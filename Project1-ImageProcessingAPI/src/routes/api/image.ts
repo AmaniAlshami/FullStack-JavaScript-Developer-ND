@@ -35,7 +35,7 @@ routes.get('/',validation, cache("10 minutes"),async(req: Request, res: Response
        if (resutl != null && fs.existsSync(resutl)) {
         return res.sendFile(resutl);
       }
-      throw new Error('BROKEN') ;
+      return res.status(404).send('Image not found');
     }
    
   }) ;
