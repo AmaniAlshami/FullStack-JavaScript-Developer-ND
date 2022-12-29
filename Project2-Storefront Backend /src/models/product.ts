@@ -6,7 +6,7 @@ export type Product = {
     name: string;
     price: number;
     category: string;
-}
+};
 
 export class ProductStore {
 
@@ -16,11 +16,9 @@ export class ProductStore {
              // @ts-ignore
         const conn = await client.connect()
         const sql = 'SELECT * FROM product'
-  
         const result = await conn.query(sql)
   
         conn.release()
-  
         return result.rows 
       } catch (error) {
         throw new Error(`Could not get products. Error: ${error}`)
@@ -46,13 +44,14 @@ export class ProductStore {
 
       // Create new product 
 
-      async create(b: Product): Promise<Product> {
+      async create(p: Product): Promise<Product> {
         try {
-      const sql = 'INSERT INTO product (name, price, category) VALUES($1, $2, $3) RETURNING *'
+          console.log()
+      const sql = 'INSERT INTO product (id, name, price, category) VALUES($1, $2, $3, $4) RETURNING *'
       // @ts-ignore
       const conn = await client.connect()
   
-      const result = await conn.query(sql, [b.name, b.price, b.category])
+      const result = await conn.query(sql, [p.id, p.name, p.price, p.category])
   
       const product = result.rows[0]
   
@@ -60,7 +59,7 @@ export class ProductStore {
   
       return product
         } catch (error) {
-            throw new Error(`Could not add new product ${name}. Error: ${error}`)
+            throw new Error(`Could not add new product. Error: ${error}`)
         }
     }
 }

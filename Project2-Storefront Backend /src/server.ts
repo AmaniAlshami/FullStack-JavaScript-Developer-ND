@@ -1,15 +1,25 @@
 import express, { Request, Response } from 'express'
 import bodyParser from 'body-parser'
+import product_routes from './handlers/product'
+import user_routes from './handlers/user'
+
 
 const app: express.Application = express()
-const address: string = "0.0.0.0:3000"
+const address: string = "0.0.0.0:3100"
 
 app.use(bodyParser.json())
 
+app.use(
+    bodyParser.urlencoded({
+      extended: true,
+    }))
 app.get('/', function (req: Request, res: Response) {
     res.send('Hello World!')
 })
 
-app.listen(3000, function () {
+product_routes(app);
+user_routes(app)
+
+app.listen(3100, function () {
     console.log(`starting app on: ${address}`)
 })

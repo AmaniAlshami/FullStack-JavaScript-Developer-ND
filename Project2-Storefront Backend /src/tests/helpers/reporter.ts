@@ -6,8 +6,9 @@ class CustomProcessor extends DisplayProcessor {
         return `${log}`;
     }
 }
+
 jasmine.getEnv().clearReporters();
-// @ts-ignore 
+             // @ts-ignore
 jasmine.getEnv().addReporter(new SpecReporter({
     spec: {
         displayStacktrace: StacktraceOption.NONE
