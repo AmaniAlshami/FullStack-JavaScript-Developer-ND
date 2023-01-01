@@ -23,3 +23,5 @@ user_routes(app)
 app.listen(3100, function () {
     console.log(`starting app on: ${address}`)
 })
+
+export default app

@@ -15,17 +15,16 @@ describe("Product Model", () => {
     expect(store.create).toBeDefined();
   });
 
-
   it('create method should add a product', async () => {
     const result = await store.create({
       id: 1,
-      name: 'cub',
+      name: 'cup',
       price: 50,
       category: 'Kitchen'
     });
     expect(result).toEqual({
       id: 1,
-      name: 'cuba',
+      name: 'cup',
       price: 50,
       category: 'Kitchen'
     });
@@ -35,7 +34,7 @@ describe("Product Model", () => {
     const result = await store.index();
     expect(result).toEqual([{
       id: 1,
-      name: 'cuba',
+      name: 'cup',
       price: 50,
       category: 'Kitchen'
     }]);
@@ -45,7 +44,7 @@ describe("Product Model", () => {
     const result = await store.show("1");
     expect(result).toEqual({
       id: 1,
-      name: 'cuba',
+      name: 'cup',
       price: 50,
       category: 'Kitchen'
     });
