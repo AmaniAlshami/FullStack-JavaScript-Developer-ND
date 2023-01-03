@@ -9,7 +9,7 @@ export type User= {
     id:number; 
     firstName :string;
     lastName:string;
-    password:string;
+    password?:string;
 }
 export class UserStore {
 
@@ -18,7 +18,7 @@ export class UserStore {
       try {
              // @ts-ignore
         const conn = await client.connect()
-        const sql = 'SELECT * FROM User'
+        const sql = 'SELECT * FROM Users'
   
         const result = await conn.query(sql)
   
@@ -33,7 +33,7 @@ export class UserStore {
     // Show one User 
     async show(id: string): Promise<User> {
         try {
-        const sql = 'SELECT * FROM User WHERE id=($1)'
+        const sql = 'SELECT id , firstName , lastName FROM Users WHERE id=($1)'
         // @ts-ignore
         const conn = await client.connect()
     
@@ -55,7 +55,7 @@ export class UserStore {
       // @ts-ignore
       const conn = await client.connect()
       const hash = bcrypt.hashSync(
-        u.password + PEPPER, 
+        u.password as string+ PEPPER, 
         parseInt(saltAround)
      );
       const result = await conn.query(sql, [u.id ,u.firstName, u.lastName, hash])

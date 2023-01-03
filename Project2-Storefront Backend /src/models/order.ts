@@ -17,12 +17,12 @@ order_id: number ;
 export class orderStore {
 
 // Get order index
-async index(): Promise<order[]> {
+async index(user_id:string): Promise<order[]> {
   try {
          // @ts-ignore
     const conn = await client.connect()
-    const sql = 'SELECT * FROM orders'
-    const result = await conn.query(sql)
+    const sql = 'select o.id as orderId , p.name as Product, p.category from orders o join order_products op on o.id = op.order_id inner join product p on p.id = op.product_id where o.user_id =($1)'
+    const result = await conn.query(sql,[user_id])
 
     conn.release()
     return result.rows 
@@ -32,19 +32,19 @@ async index(): Promise<order[]> {
 }
 
 // Show one order 
-async show(id: string): Promise<order> {
+async show(order_id: string, user_id:string): Promise<order> {
     try {
-    const sql = 'SELECT * FROM orders WHERE id=($1)'
+    const sql = 'select o.id , p.name , p.category from orders o join order_products op on o.id = op.order_id inner join product p on p.id = op.product_id where user_id =($1) and o.id=($2)'
     // @ts-ignore
     const conn = await client.connect()
 
-    const result = await conn.query(sql, [id])
+    const result = await conn.query(sql, [user_id, order_id])
 
     conn.release()
 
-    return result.rows[0]
+    return result.rows 
     } catch (error) {
-        throw new Error(`Could not find order ${id}. Error: ${error}`)
+        throw new Error(`Could not find order ${order_id}. Error: ${error}`)
     }
   }
 
@@ -74,13 +74,13 @@ async show(id: string): Promise<order> {
     try {
       const ordersql = 'SELECT * FROM orders WHERE id=($1)'
       //@ts-ignore
-      const conn = await Client.connect()
+      const conn = await client.connect()
 
       const result = await conn.query(ordersql, [orderId])
-
       const order = result.rows[0]
+      console.log(order)
 
-      if (order.status !== "open") {
+      if (order.status !== "Active") {
         throw new Error(`Could not add product ${productId} to order ${orderId} because order status is ${order.status}`)
       }
 
@@ -92,7 +92,7 @@ async show(id: string): Promise<order> {
     try {
       const sql = 'INSERT INTO order_products (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *'
       //@ts-ignore
-      const conn = await Client.connect()
+      const conn = await client.connect()
 
       const result = await conn
           .query(sql, [quantity, orderId, productId])

@@ -24,18 +24,18 @@ const create = async (req: Request, res: Response) => {
        res.json(err);
     }
 }
-
-const verify = async (req: Request, res: Response) => {
-    try {
-        res.json('Welcome .. ')
-    } catch(err) {
-        res.status(400)
-        return
-    }
+const index = async (_req:Request, res: Response) => {
+    const user = await store.index()
+    res.json(user)
 }
 
+const show = async (req: Request, res: Response) => {
+    const user = await store.show(req.params.id)
+    res.json(user)
+ }
 const user_routes = (app: express.Application) => {
-    app.get('/user', verifyAuthToken,verify)
-    app.post('/user', create)
+    app.get('/users/:id',verifyAuthToken,show)
+    app.get('/users', verifyAuthToken,index)
+    app.post('/users', create)
   }
  export default user_routes
