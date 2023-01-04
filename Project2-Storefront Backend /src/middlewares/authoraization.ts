@@ -12,8 +12,8 @@ const verifyAuthToken = (req: Request, res: Response, next: () => void) => {
         req.params.user_id = decoded.user.id;
         next()
     } catch (error) {
-        res.json('Access denied, invalid token')
         res.status(401)
+        res.json('Access denied, invalid token')
     }
 }
 

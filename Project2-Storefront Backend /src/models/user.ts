@@ -6,7 +6,7 @@ const { PEPPER } = process.env;
 const saltAround = process.env.SALT_ROUNDS!;  
 
 export type User= {
-    id:number; 
+    id?:number; 
     firstName :string;
     lastName:string;
     password?:string;

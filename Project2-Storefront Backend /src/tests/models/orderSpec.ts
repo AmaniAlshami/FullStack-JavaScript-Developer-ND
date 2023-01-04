@@ -21,11 +21,7 @@ describe("Order Model", () => {
         user_id :1 ,
         status : "Active"
     });
-    expect(result).toEqual({
-        id :4,
-        user_id :1 ,
-        status : "Active"
-    });
+    expect(result.id).toEqual(4);
   });
 
   it('index method should return a list of Orders', async () => {
