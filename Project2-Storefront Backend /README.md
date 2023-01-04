@@ -26,7 +26,11 @@ This application use of the following libraries:
 
 ### 1. DB Creation and Migrations
 
-This project use Postgres for the database , first Create database and fill `.env` and `database.json` with database settings : name, host, user and password. 
+This project use Postgres for the database , first Create database name store in Postgres.
+```
+Create Database store
+```
+and then fill `.env` and `database.json` with database settings : name, host, user and password. 
 
 Then run the migration 
 ```
@@ -43,7 +47,11 @@ check `REQUIREMENTS.md` document
 
 ### Tests
 
-Run 
+First connect to psql and create a test database
+```
+Create Database store_test
+```
+Then Run 
 ```
 npm run test
 ```
