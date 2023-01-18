@@ -1,0 +1,11 @@
+<a class= "product-container" routerLink="products/{{ product.id }}">
+    <img class="product-image" src="{{ product.url }}"><img>
+    <h3>{{ product.name }}</h3>
+    <h5>{{ product.price }}</h5>
+    <div >
+        <input type="number" min="1" max="100">
+    </div>
+    <div>
+        <button >Add to cart</button>
+    </div> 
+</a>

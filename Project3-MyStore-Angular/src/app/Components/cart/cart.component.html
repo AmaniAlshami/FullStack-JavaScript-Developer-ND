@@ -1,0 +1,24 @@
+<p>cart works!</p>
+<div class="cart-container">
+    
+    <div class="cart-panel">
+        <p>items</p>
+        <div class="cart-item"></div>
+<form (ngSubmit)="onSubmit()" class="form-margin">
+    <label>Full Name</label>
+    <br>
+    <input type="text" name="fullName" [(ngModel)]="fullName">
+    <br>
+    <label>Address</label>
+    <br>
+    <textarea name="address" [(ngModel)]="address"></textarea>
+    <br>
+    <label>Credit Card</label>
+    <br>
+    <textarea name="creditCard" [(ngModel)]="creditCard"></textarea>
+  
+    <br>
+    <button type="submit">Submit</button>
+</form>
+</div>
+</div>
