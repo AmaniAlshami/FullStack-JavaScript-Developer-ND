@@ -4,21 +4,43 @@
     <div class="cart-panel">
         <p>items</p>
         <div class="cart-item"></div>
-<form (ngSubmit)="onSubmit()" class="form-margin">
+<form #form="ngForm" (ngSubmit)="onSubmit()" class="form-margin">
     <label>Full Name</label>
     <br>
-    <input type="text" name="fullName" [(ngModel)]="fullName">
+    <input type="text" name="fullName" required minlength="5" [(ngModel)]="fullName" #namevalid="ngModel">
     <br>
     <label>Address</label>
     <br>
-    <textarea name="address" [(ngModel)]="address"></textarea>
+    <input type="text" name="address" [(ngModel)]="address">
     <br>
     <label>Credit Card</label>
     <br>
-    <textarea name="creditCard" [(ngModel)]="creditCard"></textarea>
+    <input type="text" name="creditCard" [(ngModel)]="creditCard">
   
     <br>
-    <button type="submit">Submit</button>
+    <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>
 </div>
+<div class="cart-item-details">
+  <app-product-item class="cart-item" *ngFor='let cart of cartList' [product]="cart"></app-product-item>
+  
+<div>
+<ul>
+  <li *ngFor='let cart of cartList'>
+   <h5>{{ cart.name }}</h5> 
+   
+  </li>
+</ul>
+</div>
+<br>
+<div>
+  <h5>{{ total }}</h5> 
+
+</div>
+</div>
+<div *ngIf="namevalid.invalid && namevalid.dirty">
+    <div *ngIf="namevalid.errors?.required">
+      Please enter your full name.
+    </div>
+  </div>
 </div>

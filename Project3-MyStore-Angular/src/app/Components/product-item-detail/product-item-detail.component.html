@@ -8,9 +8,10 @@
         <a class="back-link" routerLink="/">back home</a>
         <br>
         <div class="select-input" >
-        <button >Add to cart</button>
-      
+            <form (ngSubmit)="addToCart(product)" >
+            <button type="submit">Add to cart</button>      
             <input class="select-input" type="number" min="1" max="100">
+            </form>
         </div>
           
     </div>
