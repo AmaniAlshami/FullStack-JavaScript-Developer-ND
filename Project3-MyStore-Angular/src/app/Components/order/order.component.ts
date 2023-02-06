@@ -13,6 +13,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.order =  this.cartService.getOrder();
+    console.log( this.order);
   }
 
 }

@@ -1,4 +1,3 @@
-<p>cart works!</p>
 <div class="cart-container">
     
     <div class="cart-panel">
@@ -24,14 +23,6 @@
 <div class="cart-item-details">
   <app-product-item class="cart-item" *ngFor='let cart of cartList' [product]="cart"></app-product-item>
   
-<div>
-<ul>
-  <li *ngFor='let cart of cartList'>
-   <h5>{{ cart.name }}</h5> 
-   
-  </li>
-</ul>
-</div>
 <br>
 <div>
   <h5>{{ total }}</h5> 

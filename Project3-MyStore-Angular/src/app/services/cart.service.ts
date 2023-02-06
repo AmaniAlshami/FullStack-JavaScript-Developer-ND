@@ -7,20 +7,42 @@ import { Product } from '../models/product/product.model';
 })
 export class CartService {
   cart!: Cart;
-  cartList1:Cart[] = [];
+  product! : Product;
   cartList:Product[] = [];
   order!:Order;
+  total! : number;
+
   constructor() { }
 
   getCartProduct() {
     return this.cartList;
   }
 
-  addToCart(product : Product) {
-    this.cartList.push(product);
+  addToCart(newproduct : Product) {
+
+    let product = this.cartList.find(x=> x.id == newproduct.id);
+    if(product != null && product.id == newproduct.id)
+      {
+        product.amount = Number(newproduct.amount);
+      }
+    else
+        this.cartList.push(newproduct);
+  
+    this.calculateTotal(this.cartList);
     return this.cartList;
   }
 
+  calculateTotal(productList : Product [] )  {
+    let total = 0;
+    productList.forEach((product) => {
+      total += (Number(product.price) * Number(product.amount));
+    });
+     this.total = total;
+  }
+
+  getTotal() : number{
+    return this.total;
+  }
   setOrder(order : Order){
     this.order = order;
   }

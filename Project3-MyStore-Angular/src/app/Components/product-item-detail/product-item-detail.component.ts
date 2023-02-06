@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product/product.model';
+import { ProductService } from 'src/app/services/product.service';
 import { CartService } from '../../services/cart.service'
 
 @Component({
@@ -8,23 +10,24 @@ import { CartService } from '../../services/cart.service'
   styleUrls: ['./product-item-detail.component.css']
 })
 export class ProductItemDetailComponent implements OnInit {
-  product: Product;
+  product!: Product;
+  productId!:string;
+  amount!: number;
   
-  constructor(private cartService: CartService) {
-    this.product = 
-    {
-      id:1,
-      name: 'Glasses',
-      price: 129.99,
-      url: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      description: "Now you can see!"
-    }
+  constructor(private cartService: CartService, private productService:  ProductService,
+    private route:ActivatedRoute) {
    }
   ngOnInit(): void {
+    this.productId = this.route.snapshot.params['id'];
+    this.productService.getProductById(this.productId).subscribe(data => {
+      this.product = data;
+    });
   }
 
   addToCart(product : Product): void {
+    product.amount = this.amount;
     this.cartService.addToCart(product);
-    alert("Added!");
+    alert(`${this.amount} Added!`);
+    //alert("Added!");
   }
 }

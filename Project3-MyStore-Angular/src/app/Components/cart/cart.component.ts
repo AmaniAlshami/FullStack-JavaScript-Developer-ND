@@ -16,21 +16,20 @@ export class CartComponent implements OnInit {
   creditCard!: string;
   cartList1: Cart[] = [];
   cartList:Product[] = [];
-   orderForm! : Order;
-   total! : number;
+  orderForm! : Order;
+  total! : number;
   constructor(private cartService: CartService, private route:Router) { 
   }
 
   ngOnInit(): void {
     this.cartList = this.cartService.getCartProduct();
-    this.total = this.calculateTotal(this.cartList);
-    console.log( this.total)
+    this.total = this.cartService.getTotal();
   }
 
   calculateTotal(productList : Product [] ) : number {
     let total = 0;
     productList.forEach((product) => {
-      total += Number(product.price);
+      total += (Number(product.price) * Number(product.amount));
     });
     return total;
   }

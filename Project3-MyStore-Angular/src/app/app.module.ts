@@ -11,6 +11,7 @@ import { ProductItemDetailComponent } from './Components/product-item-detail/pro
 import { CartComponent } from './Components/cart/cart.component';
 import { NavBarComponent } from './Layout/nav-bar/nav-bar.component';
 import { OrderComponent } from './Components/order/order.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { OrderComponent } from './Components/order/order.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

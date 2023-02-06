@@ -1,8 +1,8 @@
 <div class="detail-container">
     
-    <img class="product-image" src="{{ product.url }}"><img>
+    <img class="product-image" src="{{ product.image }}"><img>
     <div class="detail-item">
-        <h3>{{ product.name }}</h3>
+        <h3>{{ product.title }}</h3>
         <h5>{{ product.price }}</h5>
         <h5>{{ product.description }}</h5>
         <a class="back-link" routerLink="/">back home</a>
@@ -10,7 +10,7 @@
         <div class="select-input" >
             <form (ngSubmit)="addToCart(product)" >
             <button type="submit">Add to cart</button>      
-            <input class="select-input" type="number" min="1" max="100">
+            <input class="select-input" type="number" min="1" max="100" name="amount" [(ngModel)]="amount">
             </form>
         </div>
           
