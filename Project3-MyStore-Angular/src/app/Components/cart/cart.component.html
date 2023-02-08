@@ -1,8 +1,18 @@
 <div class="cart-container">
     
-    <div class="cart-panel">
-        <p>items</p>
-        <div class="cart-item"></div>
+        <div class="cart-item">
+          <div class="cart-item-details">
+            <app-product-item class="cart-item" *ngFor='let cart of cartList' [product]="cart"
+            (total)="getTotal(cart)"></app-product-item>
+            
+          <br>
+          <div>
+            <h5>{{ total }}</h5> 
+          
+          </div>
+        </div>
+        <div class="cart-panel">
+
 <form #form="ngForm" (ngSubmit)="onSubmit()" class="form-margin">
     <label>Full Name</label>
     <br>
@@ -20,14 +30,7 @@
     <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>
 </div>
-<div class="cart-item-details">
-  <app-product-item class="cart-item" *ngFor='let cart of cartList' [product]="cart"></app-product-item>
-  
-<br>
-<div>
-  <h5>{{ total }}</h5> 
 
-</div>
 </div>
 <div *ngIf="namevalid.invalid && namevalid.dirty">
     <div *ngIf="namevalid.errors?.required">

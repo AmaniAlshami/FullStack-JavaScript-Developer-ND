@@ -4,13 +4,12 @@
     <h3>{{ product.title }}</h3>
     <h5>{{ product.price }}</h5>
 </a>
-<div >
-    <input type="number" min="1" max="100"  value="{{ product.amount }}">
-</div>
+
 <div>
     <form (ngSubmit)="addToCart(product)" >
-        <button type="submit">Add to cart</button>      
-        <input class="select-input" type="number" min="1" max="100"  value="{{ product.amount }}" name="amount" [(ngModel)]="amount">
+        <input class="select-input" type="number" min="1" max="100" name="amount"
+         [(ngModel)]="product.amount">
+         <button (click) = total.emit(product) type="submit">Add to cart</button>      
     </form>
 </div> 
 </div>

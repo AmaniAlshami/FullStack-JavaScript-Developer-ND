@@ -19,21 +19,18 @@ export class CartComponent implements OnInit {
   orderForm! : Order;
   total! : number;
   constructor(private cartService: CartService, private route:Router) { 
+    this.total = this.cartService.getTotal();
+
   }
 
   ngOnInit(): void {
-    this.cartList = this.cartService.getCartProduct();
-    this.total = this.cartService.getTotal();
+    this.cartList = this.cartService.getCartProducts();
   }
 
-  calculateTotal(productList : Product [] ) : number {
-    let total = 0;
-    productList.forEach((product) => {
-      total += (Number(product.price) * Number(product.amount));
-    });
-    return total;
+  getTotal(cart : Product) : void{
+    this.cartService.addToCart(cart);
+    this.total = this.cartService.getTotal();
   }
-  
   onSubmit(): void {
     this.orderForm = {
       fullName : this.fullName,

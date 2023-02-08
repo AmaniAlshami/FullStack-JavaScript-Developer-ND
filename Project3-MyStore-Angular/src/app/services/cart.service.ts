@@ -14,7 +14,7 @@ export class CartService {
 
   constructor() { }
 
-  getCartProduct() {
+  getCartProducts() {
     return this.cartList;
   }
 
@@ -28,11 +28,16 @@ export class CartService {
     else
         this.cartList.push(newproduct);
   
-    this.calculateTotal(this.cartList);
-    return this.cartList;
+    return this.calculateTotal(this.cartList);
+    //return this.cartList;
   }
 
-  calculateTotal(productList : Product [] )  {
+  getCartProduct(productId : Number) {
+
+    return this.cartList.find(x=> x.id == productId);
+  }
+
+  calculateTotal(productList : Product [])  {
     let total = 0;
     productList.forEach((product) => {
       total += (Number(product.price) * Number(product.amount));
@@ -40,7 +45,7 @@ export class CartService {
      this.total = total;
   }
 
-  getTotal() : number{
+  getTotal() : number {
     return this.total;
   }
   setOrder(order : Order){
