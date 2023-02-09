@@ -8,8 +8,8 @@
 <div>
     <form (ngSubmit)="addToCart(product)" >
         <input class="select-input" type="number" min="1" max="100" name="amount"
-         [(ngModel)]="product.amount">
-         <button (click) = total.emit(product) type="submit">Add to cart</button>    
+         [(ngModel)]="product.amount" (ngModelChange)="total.emit(product)">
+         <button *ngIf="canAdd == true" (click) = total.emit(product) type="submit">Add to cart</button>    
     </form>
     <form *ngIf="canRemove == true" >
          <button type="submit" (click) = update.emit(product)> Remove </button>    

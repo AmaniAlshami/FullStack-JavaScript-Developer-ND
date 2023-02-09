@@ -41,7 +41,7 @@
     <br>
     <label>Credit Card</label>
     <br>
-    <input type="text" name="creditCard" [(ngModel)]="creditCard" (ngModelChange)="validateCreditCard()" />
+    <input type="text" name="creditCard" required minlength="10" [(ngModel)]="creditCard" (ngModelChange)="validateCreditCard()" />
     <p *ngIf="creditCardvalidate != null ">{{this.creditCardvalidate}}</p>
     
     <br>

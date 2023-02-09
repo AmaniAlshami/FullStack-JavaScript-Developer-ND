@@ -10,7 +10,7 @@ import {Product} from '../../models/product/product.model'
 export class ProductItemComponent implements OnInit {
  @Input() product!: Product;
  @Input() canRemove!: boolean;
-
+ @Input() canAdd!: boolean;
  @Output() total = new EventEmitter();
  @Output() update = new EventEmitter();
 
@@ -30,6 +30,4 @@ export class ProductItemComponent implements OnInit {
     this.cartService.addToCart(product);
     alert(`${product.amount} Added!`);}
   }
-
-
 }

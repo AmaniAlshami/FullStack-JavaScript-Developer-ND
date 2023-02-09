@@ -10,6 +10,7 @@ import {ProductService} from '../../services/product.service'
 
 export class ProductListComponent implements OnInit {
   productList: Product[] = [];
+  canAdd: boolean = true;
   constructor(private productService:  ProductService) { }
 
   ngOnInit(): void {
