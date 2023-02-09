@@ -3,8 +3,9 @@
         <div class="cart-item">
           <div class="cart-item-details">
             <app-product-item class="cart-item" *ngFor='let cart of cartList' [product]="cart"
-            (total)="getTotal(cart)"></app-product-item>
-            
+             [canRemove]="canRemove"
+            (total)="getTotal(cart)"
+            (update)="update(cart)"></app-product-item>
           <br>
           <div>
             <h5>{{ total }}</h5> 
@@ -17,24 +18,33 @@
     <label>Full Name</label>
     <br>
     <input type="text" name="fullName" required minlength="5" [(ngModel)]="fullName" #namevalid="ngModel">
+    <div *ngIf="namevalid.invalid && namevalid.dirty">
+      <div *ngIf="namevalid.errors?.required">
+        Please enter your full name.
+      </div>
+      <div *ngIf="namevalid.errors?.minlength">
+        Name must be at least 5 characters long.
+   </div> 
+    </div>
     <br>
     <label>Address</label>
     <br>
-    <input type="text" name="address" [(ngModel)]="address">
+    <input type="text" name="address" [(ngModel)]="address" required minlength="5"  #addressValid="ngModel" >
+    <div *ngIf="addressValid.invalid && addressValid.dirty">
+      <div *ngIf="addressValid.errors?.required">
+        Please enter your address.
+      </div>
+      <div *ngIf="addressValid.errors?.minlength">
+        Address must be at least 5 characters long.
+      </div> 
+    </div>
     <br>
     <label>Credit Card</label>
     <br>
-    <input type="text" name="creditCard" [(ngModel)]="creditCard">
-  
+    <input type="text" name="creditCard" [(ngModel)]="creditCard" (ngModelChange)="validateCreditCard()" />
+    <p *ngIf="creditCardvalidate != null ">{{this.creditCardvalidate}}</p>
+    
     <br>
     <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>
-</div>
-
-</div>
-<div *ngIf="namevalid.invalid && namevalid.dirty">
-    <div *ngIf="namevalid.errors?.required">
-      Please enter your full name.
-    </div>
-  </div>
 </div>

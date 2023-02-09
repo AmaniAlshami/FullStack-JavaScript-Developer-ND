@@ -18,9 +18,10 @@ export class CartComponent implements OnInit {
   cartList:Product[] = [];
   orderForm! : Order;
   total! : number;
+  creditCardvalidate!: string;
+  canRemove: boolean = true;
   constructor(private cartService: CartService, private route:Router) { 
     this.total = this.cartService.getTotal();
-
   }
 
   ngOnInit(): void {
@@ -41,7 +42,22 @@ export class CartComponent implements OnInit {
     this.cartService.setOrder(this.orderForm);
     this.route.navigate(['/order']);
   }
-  
+  update(product : Product) : void{
+    this.cartList = this.removeFromCart(product);
+    this.total = this.cartService.getTotal();
+  }
+
+  removeFromCart(product : Product)  {
+    alert(`${product.title} Removed!`);
+    return this.cartService.removrFromCart(product);
+  }
+  validateCreditCard() {
+    if(this.creditCard.length != 10)
+      this.creditCardvalidate = "Entre valid credit card 10 digits"
+    else
+    this.creditCardvalidate = "";
+
+  }
 
 
 }

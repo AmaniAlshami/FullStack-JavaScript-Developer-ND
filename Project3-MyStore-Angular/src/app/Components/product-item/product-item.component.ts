@@ -9,7 +9,10 @@ import {Product} from '../../models/product/product.model'
 })
 export class ProductItemComponent implements OnInit {
  @Input() product!: Product;
+ @Input() canRemove!: boolean;
+
  @Output() total = new EventEmitter();
+ @Output() update = new EventEmitter();
 
  
   constructor(private cartService: CartService) {}
@@ -17,10 +20,16 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {
     let cart = this.cartService.getCartProduct(Number(this.product.id));
     this.product["amount"] = cart?.amount
+    
   }
 
   addToCart(product : Product): void {
+    if(product.amount == null )
+        alert("Please select the amount");
+    else{
     this.cartService.addToCart(product);
-    alert(`${product.amount} Added!`);
+    alert(`${product.amount} Added!`);}
   }
+
+
 }

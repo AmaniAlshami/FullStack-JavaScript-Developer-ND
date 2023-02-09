@@ -29,7 +29,6 @@ export class CartService {
         this.cartList.push(newproduct);
   
     return this.calculateTotal(this.cartList);
-    //return this.cartList;
   }
 
   getCartProduct(productId : Number) {
@@ -42,7 +41,7 @@ export class CartService {
     productList.forEach((product) => {
       total += (Number(product.price) * Number(product.amount));
     });
-     this.total = total;
+     this.total = Math.round(total * 100) / 100;
   }
 
   getTotal() : number {
@@ -53,5 +52,14 @@ export class CartService {
   }
   getOrder(){
     return this.order;
+  }
+
+  removrFromCart(product : Product) : Product [] {
+    let oldProduct = this.cartList.find(x=> x.id == product.id);
+    const updatedCart = this.cartList.filter(function (product) {
+      return product.id !== oldProduct?.id;
+  });    
+     this.calculateTotal(updatedCart);
+     return updatedCart;
   }
 }

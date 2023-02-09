@@ -29,7 +29,10 @@ export class ProductItemDetailComponent implements OnInit {
 
 
   addToCart(product : Product): void {
+    if(product.amount == null )
+        alert("Please select the amount");
+    else{
     this.cartService.addToCart(product);
-    alert(`${product.amount} Added!`);
+    alert(`${product.amount} Added!`);}
   }
 }
