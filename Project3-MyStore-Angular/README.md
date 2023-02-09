@@ -1,6 +1,10 @@
 # MyStoreApp
 
+## Summary
 A small store app that allow user to list product and place an order. 
+This project contains cart and product services. And three components to view product list and product details. 
+In addition there are order component and header, navigations components.
+
 ## Get started
 ### Required Technologies
 - Angular: 12.2.17
